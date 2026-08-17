@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "upcoming_classes"
+    label: "Upcoming Classes"
+    files:
+      - name: "classes"
+        label: "Upcoming Classes List"
+        file: "data/upcoming-classes.json"
+        fields:
+          - name: "classes"
+            label: "Classes"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.type}}"
+            fields:
+              - label: "Type"
+                name: "type"
+                widget: "select"
+                options: ["Look & Learn Class", "Shadow Day", "Private Class"]
+              - label: "Date"
+                name: "date"
+                widget: "string"
+                hint: "e.g. Monday 14th September 2026"
+              - label: "Location"
+                name: "location"
+                widget: "string"
+              - label: "Description"
+                name: "description"
+                widget: "text"
+              - label: "Price"
+                name: "price"
+                widget: "string"
+              - label: "Button label"
+                name: "ctaLabel"
+                widget: "string"
+                default: "Book tickets here"
+              - label: "Button type"
+                name: "ctaType"
+                widget: "select"
+                default: "tickets"
+                options:
+                  - { label: "Paid ticket link (e.g. Stripe)", value: "tickets" }
+                  - { label: "Enquiry (opens a pre-filled email)", value: "enquire" }
+              - label: "Ticket/payment link"
+                name: "url"
+                widget: "string"
+                required: false
+                hint: "Only used when Button type is 'Paid ticket link'. Paste your Stripe Payment Link (or any URL) here — leave blank to send people to Instagram instead."
+                default: ""
+              - label: "Visible on site"
+                name: "open"
+                widget: "boolean"
+                default: true
+                hint: "Turn off to hide this date without deleting it"

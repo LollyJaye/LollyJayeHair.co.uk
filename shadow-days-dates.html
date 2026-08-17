@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Available Shadow Days | The Art of Blonding — Education with Lolly</title>
+<meta name="description" content="Currently available Shadow Day dates with Lolly Jaye.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-education">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="site-logo"><img src="images/logo-main.png" alt="Lolly Jaye Hair"></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="booking.html">Bookings</a>
+      <a href="education.html">Education</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero-plain">
+    <div class="wrap">
+      <span class="eyebrow" style="display:block;margin-bottom:10px;">Shadow Days</span>
+      <h1 class="page-title">Available Shadow Days</h1>
+      <p class="lede narrow">Every date below is a real slot in Lolly's diary. Payment plans available at checkout: 3 equal instalments (final payment due one week before) or 100% upfront.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div id="dates-list"></div>
+      <div id="empty-state" class="empty-state" style="display:none;">
+        <p>There are no Shadow Days open for booking right now — enquire below and Lolly will let you know as soon as new dates are released.</p>
+        <a href="contact.html" class="btn btn-outline">Enquire &amp; join the waitlist</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="footer-logo script">Lolly Jaye hair</span>
+    <div class="footer-icons">
+      <a href="mailto:lolly@lollyjayehair.co.uk" aria-label="Email Lolly">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      </a>
+      <a href="https://instagram.com/hairbylollyjaye" target="_blank" rel="noopener" aria-label="Lolly on Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="booking.html">Bookings</a>
+      <a href="education.html">Education</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="footer-contact">
+      Based at Bay Studios, 31 Moor Street, DE21 7EA<br>
+      Email: <a href="mailto:lolly@lollyjayehair.co.uk">lolly@lollyjayehair.co.uk</a><br>
+      Instagram: <a href="https://instagram.com/hairbylollyjaye" target="_blank" rel="noopener">@hairbylollyjaye</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Lolly Jaye Hair. All rights reserved.</div>
+    <div class="footer-copy">Website designed by <a href="https://instagram.com/janusgroup.co" target="_blank" rel="noopener">@Janusgroup</a></div>
+  </div>
+</footer>
+
+<script src="js/search-data.js"></script>
+<script src="js/chat-widget.js"></script>
+<script src="js/edit-mode.js"></script>
+<script src="js/main.js"></script>
+<script>
+  /* ==========================================================================
+     EDITING SHADOW DAY DATES
+     --------------------------------------------------------------------------
+     This list was left undesigned in the original brief (see "Website Flow
+     Chart.pdf" — a full admin login + payment automation system was flagged
+     there as a future build). Until that's built, add/remove dates by hand
+     here: duplicate an object in the array below, edit the fields, save.
+     Set "open: false" to grey a date out without deleting it.
+     ========================================================================== */
+  const shadowDays = [
+    {
+      date: "Monday 14th September 2026",
+      location: "Bay Studios, Derby",
+      description: "Full day shadowing Lolly on a mix of colour correction and lived-in blonde clients.",
+      price: "£250 — 3x instalments or 100% upfront",
+      enquiryEmail: "lolly@lollyjayehair.co.uk",
+      open: true
+    },
+    {
+      date: "Wednesday 7th October 2026",
+      location: "Bay Studios, Derby",
+      description: "Full day shadowing Lolly, focused on foil placement and toning for high-maintenance blondes.",
+      price: "£250 — 3x instalments or 100% upfront",
+      enquiryEmail: "lolly@lollyjayehair.co.uk",
+      open: true
+    }
+  ];
+
+  const listEl = document.getElementById('dates-list');
+  const emptyEl = document.getElementById('empty-state');
+  const openDates = shadowDays.filter(d => d.open);
+
+  if (openDates.length === 0) {
+    emptyEl.style.display = 'block';
+  } else {
+    openDates.forEach(d => {
+      const card = document.createElement('div');
+      card.className = 'date-card';
+      const subject = encodeURIComponent(`Shadow Day Booking — ${d.date}`);
+      const body = encodeURIComponent(`Hi Lolly,\n\nI'd like to book the Shadow Day on ${d.date} at ${d.location}.\n\nName:\nPhone:\n\nThanks!`);
+      card.innerHTML = `
+        <div class="date-heading">${d.date}</div>
+        <div class="date-loc">${d.location}</div>
+        <p>${d.description}</p>
+        <p><strong>${d.price}</strong></p>
+        <a class="btn btn-solid" href="mailto:${d.enquiryEmail}?subject=${subject}&body=${body}">Book this date</a>
+      `;
+      listEl.appendChild(card);
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upcoming Classes | The Art of Blonding — Education with Lolly</title>
+<meta name="description" content="Every upcoming Look & Learn class, Shadow Day and private class date with Lolly Jaye.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-education">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="site-logo"><img src="images/logo-main.png" alt="Lolly Jaye Hair"></a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="booking.html">Bookings</a>
+      <a href="education.html">Education</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero-plain">
+    <div class="wrap">
+      <span class="eyebrow" style="display:block;margin-bottom:10px;">The Art of Blonding</span>
+      <h1 class="page-title">Upcoming Classes</h1>
+      <p class="lede narrow">Everything currently on the calendar — Look &amp; Learn classes, Shadow Days and private class dates — in one place.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap">
+      <div id="classes-list"></div>
+      <div id="empty-state" class="empty-state" style="display:none;">
+        <p>Nothing is open for booking right now — enquire below and Lolly will let you know as soon as new dates are released.</p>
+        <a href="contact.html" class="btn btn-outline">Enquire &amp; join the waitlist</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="wrap center">
+      <p class="lede narrow">Looking for something specific?</p>
+      <div class="gap-buttons">
+        <a href="shadow-days.html" class="btn btn-outline">Shadow Days</a>
+        <a href="look-and-learn.html" class="btn btn-outline">Look &amp; Learn Classes</a>
+        <a href="private-classes.html" class="btn btn-outline">Private Classes</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="footer-logo script">Lolly Jaye hair</span>
+    <div class="footer-icons">
+      <a href="mailto:lolly@lollyjayehair.co.uk" aria-label="Email Lolly">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      </a>
+      <a href="https://instagram.com/hairbylollyjaye" target="_blank" rel="noopener" aria-label="Lolly on Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="booking.html">Bookings</a>
+      <a href="education.html">Education</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="footer-contact">
+      Based at Bay Studios, 31 Moor Street, DE21 7EA<br>
+      Email: <a href="mailto:lolly@lollyjayehair.co.uk">lolly@lollyjayehair.co.uk</a><br>
+      Instagram: <a href="https://instagram.com/hairbylollyjaye" target="_blank" rel="noopener">@hairbylollyjaye</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Lolly Jaye Hair. All rights reserved.</div>
+    <div class="footer-copy">Website designed by <a href="https://instagram.com/janusgroup.co" target="_blank" rel="noopener">@Janusgroup</a></div>
+  </div>
+</footer>
+
+<script src="js/search-data.js"></script>
+<script src="js/chat-widget.js"></script>
+<script src="js/edit-mode.js"></script>
+<script src="js/main.js"></script>
+<script>
+  /* ==========================================================================
+     EDITING UPCOMING CLASSES
+     --------------------------------------------------------------------------
+     The data now lives in data/upcoming-classes.json, not inline here — that's
+     what lets the /admin panel (Decap CMS) edit it. You can still edit that
+     JSON file by hand if you'd rather not use the admin panel; the fields are
+     the same as before:
+       type          e.g. "Look & Learn Class", "Shadow Day", "Private Class"
+       date          display text
+       location
+       description
+       price         kept in the data for reference, but no longer shown on the
+                      card (removed — price is now handled at Stripe checkout)
+       ctaLabel      button text
+       ctaType       "tickets" (paid link — see "url" below) or "enquire" (pre-filled email)
+       url           only used when ctaType is "tickets" — the payment/ticket
+                      link the button opens (e.g. a Stripe Payment Link). Falls
+                      back to the Instagram profile if left blank.
+       open          set false to hide without deleting
+     NOTE: fetch() of a local JSON file is blocked by browsers when you open
+     this page directly (file://) — it only works once the site is served
+     over http(s), e.g. the local preview server or the live deployed site.
+     ========================================================================== */
+  const listEl = document.getElementById('classes-list');
+  const emptyEl = document.getElementById('empty-state');
+
+  fetch('data/upcoming-classes.json')
+    .then(res => res.json())
+    .then(data => renderClasses(data.classes || []))
+    .catch(() => renderClasses([]));
+
+  function renderClasses(classes) {
+    const openClasses = classes.filter(c => c.open);
+
+    if (openClasses.length === 0) {
+      emptyEl.style.display = 'block';
+      return;
+    }
+
+    openClasses.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'date-card';
+
+      let cta;
+      if (c.ctaType === 'tickets') {
+        const ticketUrl = c.url || 'https://instagram.com/hairbylollyjaye';
+        cta = `<a class="btn btn-solid" href="${ticketUrl}" target="_blank" rel="noopener">${c.ctaLabel}</a>`;
+      } else {
+        const subject = encodeURIComponent(`${c.type} Enquiry — ${c.date}`);
+        const body = encodeURIComponent(`Hi Lolly,\n\nI'd like to enquire about the ${c.type} on ${c.date} at ${c.location}.\n\nName:\nPhone:\n\nThanks!`);
+        cta = `<a class="btn btn-solid" href="mailto:lolly@lollyjayehair.co.uk?subject=${subject}&body=${body}">${c.ctaLabel}</a>`;
+      }
+
+      card.innerHTML = `
+        <div class="date-loc">${c.type}</div>
+        <div class="date-heading">${c.date}</div>
+        <div class="date-loc">${c.location}</div>
+        <p>${c.description}</p>
+        ${cta}
+      `;
+      listEl.appendChild(card);
+    });
+  }
+</script>
+</body>
+</html>
