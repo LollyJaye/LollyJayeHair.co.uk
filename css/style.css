@@ -467,13 +467,16 @@ p { margin: 0 0 16px; }
 .quote-card .attribution {
   display: block;
   margin-top: 10px;
-  font-size: 1.1rem;
-  font-family: 'Times New Roman MT Condensed', 'Times New Roman', Times, serif;
-  font-style: italic;
+}
+
+.quote-card .attribution img {
+  height: 30px;
+  width: auto;
+  margin: 0 auto;
 }
 
 @media (min-width: 800px) {
-  .quote-card .attribution { font-size: 1.9rem; }
+  .quote-card .attribution img { height: 48px; }
 }
 
 /* Education cards grid */
@@ -556,12 +559,6 @@ p { margin: 0 0 16px; }
 .copy-page-hero h1.script {
   font-family: 'Times New Roman MT Condensed', 'Times New Roman', Times, serif;
   font-style: italic;
-}
-
-#hair-appointments h2,
-#hair-appointments p,
-#hair-appointments .btn {
-  font-family: 'Noto Serif Display', serif;
 }
 
 .explore-edu-cta {
@@ -822,12 +819,19 @@ form.card-form {
 }
 
 .site-footer .footer-logo {
-  font-family: 'Times New Roman MT Condensed', 'Times New Roman', Times, serif;
-  font-style: italic;
-  font-size: 2.8rem;
-  color: var(--cream-light);
-  margin-bottom: 20px;
   display: inline-block;
+  margin-bottom: 20px;
+}
+
+/* The licensed "Times New Roman MT Condensed" font used in the real logo
+   isn't installed on visitors' devices, so text styled to match it renders
+   as a plain fallback that looks noticeably different per device. Using the
+   actual logo image instead guarantees it always matches — recoloured light
+   here since the footer background is dark. */
+.site-footer .footer-logo img {
+  height: 46px;
+  width: auto;
+  filter: brightness(0) invert(1);
 }
 
 .footer-icons {
