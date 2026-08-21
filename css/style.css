@@ -296,8 +296,12 @@ p { margin: 0 0 16px; }
 
 .home-hero { min-height: 60vh; }
 
+/* hero-home.jpg is only 1080px wide natively — stretched full-bleed across a
+   wide desktop screen it gets blown up well past its real resolution and
+   turns visibly blurry. Capping the box width keeps it close to native size
+   (a small upscale is barely noticeable) instead of stretching indefinitely. */
 @media (min-width: 800px) {
-  .home-hero { aspect-ratio: 1.6 / 1; min-height: 480px; }
+  .home-hero { aspect-ratio: 1.6 / 1; min-height: 480px; max-width: 1200px; margin: 0 auto; }
 }
 
 .hero > img {
