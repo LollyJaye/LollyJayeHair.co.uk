@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Available Shadow Days | The Art of Blonding — Education with Lolly</title>
+<title>Available Shadow Days | The Art of Blonding – Education with Lolly</title>
 <meta name="description" content="Currently available Shadow Day dates with Lolly Jaye.">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -36,7 +36,7 @@
     <div class="wrap">
       <div id="dates-list"></div>
       <div id="empty-state" class="empty-state" style="display:none;">
-        <p>There are no Shadow Days open for booking right now — enquire below and Lolly will let you know as soon as new dates are released.</p>
+        <p>There are no Shadow Days open for booking right now – enquire below and Lolly will let you know as soon as new dates are released.</p>
         <a href="contact.html" class="btn btn-outline">Enquire &amp; join the waitlist</a>
       </div>
     </div>
@@ -66,21 +66,20 @@
       Email: <a href="mailto:lolly@lollyjayehair.co.uk">lolly@lollyjayehair.co.uk</a><br>
       Instagram: <a href="https://instagram.com/hairbylollyjaye" target="_blank" rel="noopener">@hairbylollyjaye</a>
     </div>
-    <div class="footer-copy">&copy; 2026 Lolly Jaye Hair. All rights reserved.</div>
+    <div class="footer-copy">&copy; 2026 <span class="script">Lolly Jaye Hair</span>. All rights reserved.</div>
     <div class="footer-copy">Website designed by <a href="https://instagram.com/janusgroup.co" target="_blank" rel="noopener">@Janusgroup</a></div>
   </div>
 </footer>
 
 <script src="js/search-data.js"></script>
 <script src="js/chat-widget.js"></script>
-<script src="js/edit-mode.js"></script>
 <script src="js/main.js"></script>
 <script>
   /* ==========================================================================
      EDITING SHADOW DAY DATES
      --------------------------------------------------------------------------
      This list was left undesigned in the original brief (see "Website Flow
-     Chart.pdf" — a full admin login + payment automation system was flagged
+     Chart.pdf" – a full admin login + payment automation system was flagged
      there as a future build). Until that's built, add/remove dates by hand
      here: duplicate an object in the array below, edit the fields, save.
      Set "open: false" to grey a date out without deleting it.
@@ -90,7 +89,7 @@
       date: "Monday 14th September 2026",
       location: "Bay Studios, Derby",
       description: "Full day shadowing Lolly on a mix of colour correction and lived-in blonde clients.",
-      price: "£250 — 3x instalments or 100% upfront",
+      price: "£250 – 3x instalments or 100% upfront",
       enquiryEmail: "lolly@lollyjayehair.co.uk",
       open: true
     },
@@ -98,7 +97,7 @@
       date: "Wednesday 7th October 2026",
       location: "Bay Studios, Derby",
       description: "Full day shadowing Lolly, focused on foil placement and toning for high-maintenance blondes.",
-      price: "£250 — 3x instalments or 100% upfront",
+      price: "£250 – 3x instalments or 100% upfront",
       enquiryEmail: "lolly@lollyjayehair.co.uk",
       open: true
     }
@@ -114,7 +113,7 @@
     openDates.forEach(d => {
       const card = document.createElement('div');
       card.className = 'date-card';
-      const subject = encodeURIComponent(`Shadow Day Booking — ${d.date}`);
+      const subject = encodeURIComponent(`Shadow Day Booking – ${d.date}`);
       const body = encodeURIComponent(`Hi Lolly,\n\nI'd like to book the Shadow Day on ${d.date} at ${d.location}.\n\nName:\nPhone:\n\nThanks!`);
       card.innerHTML = `
         <div class="date-heading">${d.date}</div>

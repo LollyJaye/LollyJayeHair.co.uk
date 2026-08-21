@@ -1,4 +1,4 @@
-// Instagram slider — auto-advancing, swipeable, driven by js/instagram-data.js
+// Instagram slider – auto-advancing, swipeable, driven by js/instagram-data.js
 
 document.addEventListener('DOMContentLoaded', initInstagramSlider);
 

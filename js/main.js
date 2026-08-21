@@ -1,4 +1,4 @@
-// Lolly Jaye Hair — shared site behaviour
+// Lolly Jaye Hair – shared site behaviour
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
@@ -38,7 +38,7 @@ function markActiveNavLink() {
 /**
  * Enquiry forms send automatically to Lolly's inbox via Formspree
  * (https://formspree.io) once a real endpoint is set on the form's
- * data-formspree attribute — see README.md "Turning on real email delivery"
+ * data-formspree attribute – see README.md "Turning on real email delivery"
  * for the 2-minute setup. Until that's done (data-formspree is still the
  * placeholder), forms fall back to opening the visitor's own email app
  * pre-filled with the message, so the site still works out of the box.
@@ -51,17 +51,27 @@ function markActiveNavLink() {
  */
 function initForms() {
   document.querySelectorAll('form[data-mailto-form]').forEach(form => {
-    const endpoint = form.getAttribute('data-formspree') || '';
-    const formspreeReady = /^https:\/\/formspree\.io\/f\/\w+/.test(endpoint);
     const note = form.parentElement.querySelector('.form-note');
-    if (note) {
-      note.textContent = formspreeReady
-        ? "Your enquiry is sent straight to Lolly's inbox."
-        : 'Submitting opens your email app with this message ready to send (real inbox delivery isn\'t switched on yet — see README.md).';
+
+    function updateNote() {
+      const endpoint = form.getAttribute('data-formspree') || '';
+      const formspreeReady = /^https:\/\/formspree\.io\/f\/\w+/.test(endpoint);
+      if (note) {
+        note.textContent = formspreeReady
+          ? "Your enquiry is sent straight to Lolly's inbox and she will reply to you personally."
+          : 'Submitting opens your email app with this message ready to send (real inbox delivery isn\'t switched on yet – see README.md).';
+      }
     }
+    updateNote();
+    form.addEventListener('lj:endpoint-changed', updateNote);
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Read the endpoint fresh at submit time – on the Contact page it can
+      // change after page load, once the visitor picks what they're enquiring about.
+      const endpoint = form.getAttribute('data-formspree') || '';
+      const formspreeReady = /^https:\/\/formspree\.io\/f\/\w+/.test(endpoint);
 
       const to = form.getAttribute('data-mailto-form');
       const subjectTemplate = form.getAttribute('data-subject') || 'New website enquiry';
@@ -100,7 +110,7 @@ function initForms() {
       const success = form.parentElement.querySelector('.form-success');
       if (success) {
         success.textContent = sentViaFormspree
-          ? "Thank you — your enquiry has been sent to Lolly."
+          ? "Thank you – your enquiry has been sent to Lolly."
           : "Your email app should now be open with your message ready to send. If nothing opened, email lolly@lollyjayehair.co.uk directly.";
         success.classList.add('show');
         success.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -108,4 +118,25 @@ function initForms() {
       form.reset();
     });
   });
+
+  /**
+   * The Contact page's "What are you enquiring about?" dropdown routes to a
+   * different Formspree inbox per class type, so each enquiry lands with the
+   * right person/folder instead of all going into one generic inbox.
+   */
+  const enquirySelect = document.getElementById('enquiry');
+  if (enquirySelect) {
+    const form = enquirySelect.closest('form');
+    const endpointsByEnquiry = {
+      'Shadow Days': 'https://formspree.io/f/xvkpdrvv',
+      '1:1 Education': 'https://formspree.io/f/mbgrqypb',
+      'Private Classes': 'https://formspree.io/f/mjybjrpq',
+      'Look & Learn Classes': 'https://formspree.io/f/mqpzwbwk'
+    };
+    enquirySelect.addEventListener('change', () => {
+      const endpoint = endpointsByEnquiry[enquirySelect.value] || form.getAttribute('data-formspree-default') || '';
+      form.setAttribute('data-formspree', endpoint);
+      form.dispatchEvent(new Event('lj:endpoint-changed'));
+    });
+  }
 }

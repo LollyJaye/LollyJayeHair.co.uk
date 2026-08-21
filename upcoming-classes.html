@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upcoming Classes | The Art of Blonding — Education with Lolly</title>
+<title>Upcoming Classes | The Art of Blonding – Education with Lolly</title>
 <meta name="description" content="Every upcoming Look & Learn class, Shadow Day and private class date with Lolly Jaye.">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -28,7 +28,7 @@
     <div class="wrap">
       <span class="eyebrow" style="display:block;margin-bottom:10px;">The Art of Blonding</span>
       <h1 class="page-title">Upcoming Classes</h1>
-      <p class="lede narrow">Everything currently on the calendar — Look &amp; Learn classes, Shadow Days and private class dates — in one place.</p>
+      <p class="lede narrow">Everything currently on the calendar</p>
     </div>
   </section>
 
@@ -36,7 +36,7 @@
     <div class="wrap">
       <div id="classes-list"></div>
       <div id="empty-state" class="empty-state" style="display:none;">
-        <p>Nothing is open for booking right now — enquire below and Lolly will let you know as soon as new dates are released.</p>
+        <p>Nothing is open for booking right now – enquire below and Lolly will let you know as soon as new dates are released.</p>
         <a href="contact.html" class="btn btn-outline">Enquire &amp; join the waitlist</a>
       </div>
     </div>
@@ -77,20 +77,19 @@
       Email: <a href="mailto:lolly@lollyjayehair.co.uk">lolly@lollyjayehair.co.uk</a><br>
       Instagram: <a href="https://instagram.com/hairbylollyjaye" target="_blank" rel="noopener">@hairbylollyjaye</a>
     </div>
-    <div class="footer-copy">&copy; 2026 Lolly Jaye Hair. All rights reserved.</div>
+    <div class="footer-copy">&copy; 2026 <span class="script">Lolly Jaye Hair</span>. All rights reserved.</div>
     <div class="footer-copy">Website designed by <a href="https://instagram.com/janusgroup.co" target="_blank" rel="noopener">@Janusgroup</a></div>
   </div>
 </footer>
 
 <script src="js/search-data.js"></script>
 <script src="js/chat-widget.js"></script>
-<script src="js/edit-mode.js"></script>
 <script src="js/main.js"></script>
 <script>
   /* ==========================================================================
      EDITING UPCOMING CLASSES
      --------------------------------------------------------------------------
-     The data now lives in data/upcoming-classes.json, not inline here — that's
+     The data now lives in data/upcoming-classes.json, not inline here – that's
      what lets the /admin panel (Decap CMS) edit it. You can still edit that
      JSON file by hand if you'd rather not use the admin panel; the fields are
      the same as before:
@@ -98,16 +97,15 @@
        date          display text
        location
        description
-       price         kept in the data for reference, but no longer shown on the
-                      card (removed — price is now handled at Stripe checkout)
+       price         shown in small text under the location, e.g. "£275"
        ctaLabel      button text
-       ctaType       "tickets" (paid link — see "url" below) or "enquire" (pre-filled email)
-       url           only used when ctaType is "tickets" — the payment/ticket
+       ctaType       "tickets" (paid link – see "url" below) or "enquire" (pre-filled email)
+       url           only used when ctaType is "tickets" – the payment/ticket
                       link the button opens (e.g. a Stripe Payment Link). Falls
                       back to the Instagram profile if left blank.
        open          set false to hide without deleting
      NOTE: fetch() of a local JSON file is blocked by browsers when you open
-     this page directly (file://) — it only works once the site is served
+     this page directly (file://) – it only works once the site is served
      over http(s), e.g. the local preview server or the live deployed site.
      ========================================================================== */
   const listEl = document.getElementById('classes-list');
@@ -135,7 +133,7 @@
         const ticketUrl = c.url || 'https://instagram.com/hairbylollyjaye';
         cta = `<a class="btn btn-solid" href="${ticketUrl}" target="_blank" rel="noopener">${c.ctaLabel}</a>`;
       } else {
-        const subject = encodeURIComponent(`${c.type} Enquiry — ${c.date}`);
+        const subject = encodeURIComponent(`${c.type} Enquiry – ${c.date}`);
         const body = encodeURIComponent(`Hi Lolly,\n\nI'd like to enquire about the ${c.type} on ${c.date} at ${c.location}.\n\nName:\nPhone:\n\nThanks!`);
         cta = `<a class="btn btn-solid" href="mailto:lolly@lollyjayehair.co.uk?subject=${subject}&body=${body}">${c.ctaLabel}</a>`;
       }
@@ -144,6 +142,7 @@
         <div class="date-loc">${c.type}</div>
         <div class="date-heading">${c.date}</div>
         <div class="date-loc">${c.location}</div>
+        ${c.price ? `<div class="date-price">${c.price}</div>` : ''}
         <p>${c.description}</p>
         ${cta}
       `;

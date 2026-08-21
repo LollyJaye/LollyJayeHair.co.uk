@@ -1,9 +1,9 @@
 /* ==========================================================================
-   "Ask" widget — searches the site content for an answer.
+   "Ask" widget – searches the site content for an answer.
    --------------------------------------------------------------------------
    Honest label for what this is: it's keyword search over js/search-data.js,
    not a generative AI / LLM. That means zero cost, zero backend, and it
-   works offline — but it can only surface content that's already on the
+   works offline – but it can only surface content that's already on the
    site, not hold a real conversation. See README.md "The Ask widget" for
    how to upgrade this to a real AI chatbot later if wanted.
    ========================================================================== */
@@ -73,7 +73,7 @@ function initAskWidget() {
   panel.innerHTML = `
     <div class="ask-header">
       <span class="ask-header-title">Ask about Lolly Jaye Hair</span>
-      <span class="ask-header-sub">Searches this website to answer — not a live chat with Lolly</span>
+      <span class="ask-header-sub">Searches this website to answer – not a live chat with Lolly</span>
     </div>
     <div class="ask-messages" id="ask-messages"></div>
     <form class="ask-form" id="ask-form" autocomplete="off">
