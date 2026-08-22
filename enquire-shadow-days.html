@@ -28,7 +28,7 @@
     <div class="wrap">
       <h1>Shadow Day Enquiry</h1>
 
-      <form class="card-form" data-mailto-form="lolly@lollyjayehair.co.uk" data-formspree="https://formspree.io/f/xvkpdrvv" data-subject="Shadow Day Enquiry {{Name}}">
+      <form class="card-form" data-mailto-form="lolly@lollyjayehair.co.uk" data-formspree="https://formspree.io/f/xvkpdrvv" data-subject="{{Enquiry}} Enquiry – {{Name}}">
         <div class="field">
           <label for="name">Full name</label>
           <input type="text" id="name" name="Name" required>
@@ -40,6 +40,15 @@
         <div class="field">
           <label for="phone">Phone</label>
           <input type="tel" id="phone" name="Phone">
+        </div>
+        <div class="field">
+          <label for="enquiry">What are you enquiring about?</label>
+          <select id="enquiry" name="Enquiry" required>
+            <option value="Shadow Days" selected>Shadow Days</option>
+            <option value="Look & Learn Classes">Look &amp; Learn Classes</option>
+            <option value="1:1 Education">1:1 Education</option>
+            <option value="Private Classes">Private Classes</option>
+          </select>
         </div>
         <div class="field">
           <label for="experience">Current experience level</label>
