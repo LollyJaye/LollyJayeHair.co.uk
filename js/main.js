@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
+  initEnquiryFieldSwap();
   initForms();
   markActiveNavLink();
 });
@@ -32,6 +33,36 @@ function markActiveNavLink() {
   document.querySelectorAll('.site-nav a[href]').forEach(link => {
     const href = link.getAttribute('href');
     if (href === path) link.setAttribute('aria-current', 'page');
+  });
+}
+
+/**
+ * The three dedicated enquiry pages (1:1, Private Classes, Shadow Days) each
+ * carry all four categories' extra questions in the page, marked up as
+ * <div class="enquiry-extra" data-enquiry="Shadow Days">...</div> blocks.
+ * Only the block matching the "What are you enquiring about?" dropdown is
+ * shown/enabled at a time, so switching category swaps in that category's
+ * actual questions instead of just changing where a generic form is sent.
+ *
+ * The Contact page has no .enquiry-extra blocks at all, so this function
+ * finds nothing there and its generic fields stay exactly as they are
+ * regardless of what's picked in the dropdown.
+ */
+function initEnquiryFieldSwap() {
+  document.querySelectorAll('form').forEach(form => {
+    const select = form.querySelector('#enquiry');
+    const blocks = form.querySelectorAll('.enquiry-extra');
+    if (!select || !blocks.length) return;
+
+    function sync() {
+      blocks.forEach(block => {
+        const active = block.dataset.enquiry === select.value;
+        block.hidden = !active;
+        block.querySelectorAll('input, textarea, select').forEach(f => { f.disabled = !active; });
+      });
+    }
+    sync();
+    select.addEventListener('change', sync);
   });
 }
 
@@ -75,7 +106,7 @@ function initForms() {
 
       const to = form.getAttribute('data-mailto-form');
       const subjectTemplate = form.getAttribute('data-subject') || 'New website enquiry';
-      const fields = Array.from(form.querySelectorAll('input, textarea, select'));
+      const fields = Array.from(form.querySelectorAll('input, textarea, select')).filter(f => !f.disabled);
 
       const values = {};
       fields.forEach(f => { values[f.name] = f.value.trim(); });

@@ -50,18 +50,54 @@
             <option value="Private Classes" selected>Private Classes</option>
           </select>
         </div>
-        <div class="field">
-          <label for="salon">Salon name &amp; address</label>
-          <input type="text" id="salon" name="Salon Name and Address" required>
+        <div class="enquiry-extra" data-enquiry="Shadow Days">
+          <div class="field">
+            <label for="shadow-experience">Current experience level</label>
+            <input type="text" id="shadow-experience" name="Experience Level" placeholder="e.g. newly qualified, 3 years behind the chair" required>
+          </div>
+          <div class="field">
+            <label for="shadow-date">Preferred date (if you have one in mind)</label>
+            <input type="text" id="shadow-date" name="Preferred Date" placeholder="Check Upcoming Classes for available dates">
+          </div>
+          <div class="field">
+            <label for="shadow-details">What are you hoping to get from the day?</label>
+            <textarea id="shadow-details" name="Details" placeholder="A bit about you, and what you'd like to take away from shadowing" required></textarea>
+          </div>
         </div>
-        <div class="field">
-          <label for="attendees">Number of attendees</label>
-          <input type="number" id="attendees" name="Number of Attendees" min="1" required>
+
+        <div class="enquiry-extra" data-enquiry="Look & Learn Classes">
+          <div class="field">
+            <label for="look-date">Preferred date (if you have one in mind)</label>
+            <input type="text" id="look-date" name="Preferred Date" placeholder="Check Upcoming Classes for available dates">
+          </div>
+          <div class="field">
+            <label for="look-details">What would you like to get from the class?</label>
+            <textarea id="look-details" name="Details" placeholder="A bit about you, and what you'd like to take away from the class" required></textarea>
+          </div>
         </div>
-        <div class="field">
-          <label for="comments">Comments</label>
-          <textarea id="comments" name="Comments" placeholder="What would you like the class to focus on?"></textarea>
+
+        <div class="enquiry-extra" data-enquiry="1:1 Education">
+          <div class="field">
+            <label for="onetoone-details">Tell me more</label>
+            <textarea id="onetoone-details" name="Details" placeholder="What would you like to focus on in your 1:1 session?" required></textarea>
+          </div>
         </div>
+
+        <div class="enquiry-extra" data-enquiry="Private Classes">
+          <div class="field">
+            <label for="private-salon">Salon name &amp; address</label>
+            <input type="text" id="private-salon" name="Salon Name and Address" required>
+          </div>
+          <div class="field">
+            <label for="private-attendees">Number of attendees</label>
+            <input type="number" id="private-attendees" name="Number of Attendees" min="1" required>
+          </div>
+          <div class="field">
+            <label for="private-comments">Comments</label>
+            <textarea id="private-comments" name="Comments" placeholder="What would you like the class to focus on?"></textarea>
+          </div>
+        </div>
+
         <button type="submit" class="btn btn-solid btn-block">Submit</button>
         <p class="form-note">Submitting opens your email app, pre-addressed to Lolly with the subject "Private Class Enquiry &lt;your name&gt;" so it's easy to file.</p>
       </form>
